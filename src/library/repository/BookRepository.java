@@ -66,7 +66,7 @@ public class BookRepository {
 
     }
 
-    //lägg till en bok, ink författare, bokbeskrivning, författarbeskrivning
+    //lägg till en bok, ink författare, bokbeskrivning, författarbeskrivning samt junction tables
     public void addBook() {
         Scanner scanner = new Scanner(System.in);
 
