@@ -10,7 +10,7 @@ public class Book {
     private int pageCount;
     private String author;
 
-
+    //constructor
     public Book(String title, int yearPublished, int availableCopies, String summary, String language, int pageCount, String author) {
         this.title = title;
         this.yearPublished = yearPublished;
@@ -20,7 +20,14 @@ public class Book {
         this.pageCount = pageCount;
         this.author = author;
     }
-
+    //constructor med färre attribut
+    public Book(String title, int yearPublished, int availableCopies, String summary, String author) {
+        this.title = title;
+        this.yearPublished = yearPublished;
+        this.availableCopies = availableCopies;
+        this.summary = summary;
+        this.author = author;
+    }
     public String getTitle() {
         return title;
     }
@@ -86,6 +93,16 @@ public class Book {
                 ", Summary: '" + summary + '\'' +
                 ", Language: '" + language + '\'' +
                 ", Page Count: " + pageCount +
+                ", Author: '" + author + "'";
+    }
+
+
+    public String toSearchString() {
+        return "Book - " +
+                "Title: '" + title + '\'' +
+                ", Year Published: " + yearPublished +
+                ", Available Copies: " + availableCopies +
+                ", Summary: '" + summary + '\'' +
                 ", Author: '" + author + "'";
     }
 }

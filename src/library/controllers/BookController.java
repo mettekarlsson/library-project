@@ -1,5 +1,6 @@
 package library.controllers;
 
+import library.Main;
 import library.model.Book;
 import library.repository.BookRepository;
 
@@ -32,12 +33,16 @@ public class BookController {
                     break;
                 }
                 case 2: {
-                   // bookrepository.searchBook();
+                    System.out.println("Sök på en bok-titel:");
+                    ArrayList<Book> books = bookrepository.searchBook(scanner.nextLine());
+                    for (Book b : books) {
+                        System.out.println(b.toSearchString());
+                    }
                     break;
                 }
                 case 3: {
-                   // bookrepository.addBook();
-                    break;
+                   bookrepository.addBook();
+                   break;
                 }
                 case 4: {
                    // bookrepository.editBook();
