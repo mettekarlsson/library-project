@@ -1,6 +1,5 @@
 package library;
-
-import library.controllers.BookController;
+import library.controllers.MainController;
 
 import java.util.Scanner;
 
@@ -8,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        BookController bookcontroller = new BookController();
+        MainController mainController = new MainController();
         boolean active = true;
 
             while (active) {
@@ -29,11 +28,11 @@ public class Main {
 
                 switch (choice) {
                     case 1: {
-                        bookcontroller.memberMainMenu();
+                        mainController.memberMainMenu();
                         break;
                     }
                     case 2: {
-                        bookcontroller.adminMainMenu();
+                        mainController.adminMainMenu();
                         break;
                     }
                     case 0: {
