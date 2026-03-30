@@ -3,11 +3,13 @@ package library.controllers;
 import library.Main;
 import library.model.Book;
 import library.repository.BookRepository;
+import library.service.BookService;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BookController {
+    BookService bookservice = new BookService();
 
     public void showBookMenu() {
         BookRepository bookrepository = new BookRepository();
@@ -27,14 +29,14 @@ public class BookController {
 
             switch (choice) {
                 case 1: {
-                    ArrayList<Book> books = new ArrayList<>(bookrepository.getAllBooks());
+                    ArrayList<Book> books = new ArrayList<>(bookservice.getAllBooks());
                     for (Book b : books) {
                         System.out.println(b);
                     }
                     break;
                 }
                 case 2: {
-                    ArrayList<Book> books = new ArrayList<>(bookrepository.getAllAvailableBooks());
+                    ArrayList<Book> books = new ArrayList<>(bookservice.getAllAvailableBooks());
                     for (Book b : books) {
                         System.out.println(b);
                     }
