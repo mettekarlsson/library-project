@@ -272,9 +272,23 @@ public class BookRepository {
                     }
                 }
             } catch (SQLException e) {
-                throw new RuntimeException(e);
+                System.out.println("Fel: " + e.getMessage());
             }
         }
 
+    }
+
+    public void deleteBook() {
+        System.out.println("Skriv in ID på den bok du vill radera:");
+        int bookId = Integer.parseInt(scanner.nextLine());
+
+        try (Connection conn = DriverManager.getConnection(URL, USER, PASS);
+             PreparedStatement stmt = conn.prepareStatement("DELETE FROM books WHERE id = ?")) {
+            stmt.setInt(1, bookId);
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println("Fel: " + e.getMessage());
+        }
     }
 }

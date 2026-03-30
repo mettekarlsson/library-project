@@ -69,7 +69,7 @@ public class BookController {
                     break;
                 }
                 case 7: {
-                   // bookrepository.deleteBook();
+                   bookservice.deleteBook();
                     break;
                 }
                 case 0: {

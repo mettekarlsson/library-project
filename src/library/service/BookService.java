@@ -44,5 +44,10 @@ public class BookService {
         bookrepository.editBook();
     }
 
+    //bara ett mellansteg mellan repository och controller
+    public void deleteBook() {
+        bookrepository.deleteBook();
+    }
+
 
 }
