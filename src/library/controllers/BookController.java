@@ -104,13 +104,49 @@ public class BookController {
         }
     }
 
+    public void adminMainMenu() {
+        boolean active = true;
+        while (active) {
+            System.out.println("---- Welcome ----");
+            System.out.println("1. Books");
+            System.out.println("2. Loans");
+            System.out.println("3. Members");
+            System.out.println("4. Authors? ");
+            System.out.println("0. Log out");
+            int choice = Integer.parseInt(scanner.nextLine());
+
+            switch (choice) {
+                case 1: {
+                    adminBookMenu();
+                    break;
+                }
+                case 2: {
+                    //adminLoanMenu();
+                    break;
+                }
+                case 3: {
+                    //adminMemberMenu();
+                    break;
+                }
+                case 4: {
+                    //adminAuthorMenu();
+                    break;
+                }
+                case 0: {
+                    active = false;
+                    break;
+                }
+            }
+        }
+    }
+
     public void adminBookMenu() {
         boolean active = true;
         while (active) {
             System.out.println("1. Add book");
             System.out.println("2. Update book");
             System.out.println("3. Delete book");
-            System.out.println("0. Log out");
+            System.out.println("0. Return");
             int choice = Integer.parseInt(scanner.nextLine());
 
             switch (choice) {

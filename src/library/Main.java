@@ -33,7 +33,7 @@ public class Main {
                         break;
                     }
                     case 2: {
-                        bookcontroller.adminBookMenu();
+                        bookcontroller.adminMainMenu();
                         break;
                     }
                     case 0: {
