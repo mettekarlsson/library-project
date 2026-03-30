@@ -10,6 +10,7 @@ public class BookRepository {
     private final String URL = "jdbc:mysql://localhost:3306/bibliotek";
     private final String USER = "root";
     private final String PASS = "Apelsinkr0kant!";
+    Scanner scanner = new Scanner(System.in);
 
     //visa alla böcker i biblioteket
     public ArrayList<Book> getAllBooks() {
@@ -39,6 +40,7 @@ public class BookRepository {
         return books;
     }
 
+    //visa alla böcker som finns tillgängliga
     public ArrayList<Book> getAllAvailableBooks() {
         ArrayList<Book> books = new ArrayList<>();
 
@@ -95,7 +97,6 @@ public class BookRepository {
 
     //lägg till en bok, ink författare, bokbeskrivning, författarbeskrivning samt junction tables
     public void addBook() {
-        Scanner scanner = new Scanner(System.in);
 
         try (Connection conn = DriverManager.getConnection(URL, USER, PASS);
              PreparedStatement stmt = conn.prepareStatement("INSERT INTO books (title, isbn, year_published, total_copies, available_copies) VALUES (?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS)) {
@@ -156,9 +157,9 @@ public class BookRepository {
                 int bookCategoryRowsAffected = stmt5.executeUpdate();
             }
 
-                //lägg till info i authors
+            //lägg till info i authors
             int authorId = 0;
-                try (PreparedStatement stmt2 = conn.prepareStatement("INSERT INTO authors (first_name, last_name, nationality, birth_date) VALUES (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS)) {
+            try (PreparedStatement stmt2 = conn.prepareStatement("INSERT INTO authors (first_name, last_name, nationality, birth_date) VALUES (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS)) {
                 System.out.println("Skriv in författarens förnamn:");
                 stmt2.setString(1, scanner.nextLine());
                 System.out.println("Skriv in författarens efternamn:");
@@ -176,7 +177,7 @@ public class BookRepository {
                 }
             }
 
-                //lägg till info i book_authors
+            //lägg till info i book_authors
             try (PreparedStatement stmt6 = conn.prepareStatement("INSERT INTO book_authors (book_id, author_id) VALUES (?, ?)")) {
                 stmt6.setInt(1, bookId);
                 stmt6.setInt(2, authorId);
@@ -196,9 +197,84 @@ public class BookRepository {
             }
 
 
-            } catch (SQLException e) {
+        } catch (SQLException e) {
             System.out.println("Fel: " + e.getMessage());
 
         }
+    }
+
+    public void editBook() {
+        System.out.println("Skriv in ID på den bok du vill uppdatera:");
+        int bookId = Integer.parseInt(scanner.nextLine());
+        boolean active = true;
+
+        while (active) {
+            System.out.println("Vilken kolumn vill du uppdatera?");
+            System.out.println("1. Title");
+            System.out.println("2. ISBN");
+            System.out.println("3. Year Published");
+            System.out.println("4. Total copies");
+            System.out.println("5. Available copies");
+            System.out.println("0. Return");
+
+            int choice = Integer.parseInt(scanner.nextLine());
+
+            try (Connection conn = DriverManager.getConnection(URL, USER, PASS)) {
+                switch (choice) {
+                    case 1: {
+                        System.out.println("Skriv in den nya titeln:");
+                        String bookTitle = scanner.nextLine();
+                        PreparedStatement stmt = conn.prepareStatement("UPDATE books SET title = ? WHERE id = ?");
+                        stmt.setString(1, bookTitle);
+                        stmt.setInt(2, bookId);
+                        stmt.executeUpdate();
+                        break;
+                    }
+                    case 2: {
+                        System.out.println("Skriv in det nya ISBN-värdet:");
+                        String bookIsbn = scanner.nextLine();
+                        PreparedStatement stmt = conn.prepareStatement("UPDATE books SET isbn = ? WHERE id = ?");
+                        stmt.setString(1, bookIsbn);
+                        stmt.setInt(2, bookId);
+                        stmt.executeUpdate();
+                        break;
+                    }
+                    case 3: {
+                        System.out.println("Skriv in det nya publicerings-året:");
+                        int bookYearPublished = Integer.parseInt(scanner.nextLine());
+                        PreparedStatement stmt = conn.prepareStatement("UPDATE books SET year_published = ? WHERE id = ?");
+                        stmt.setInt(1, bookYearPublished);
+                        stmt.setInt(2, bookId);
+                        stmt.executeUpdate();
+                        break;
+                    }
+                    case 4: {
+                        System.out.println("Skriv in det nya totala antalet kopior:");
+                        int bookTotalCopies = Integer.parseInt(scanner.nextLine());
+                        PreparedStatement stmt = conn.prepareStatement("UPDATE books SET total_copies = ? WHERE id = ?");
+                        stmt.setInt(1, bookTotalCopies);
+                        stmt.setInt(2, bookId);
+                        stmt.executeUpdate();
+                        break;
+                    }
+                    case 5: {
+                        System.out.println("Skriv in det nya antalet tillgängliga kopior:");
+                        int bookAvailableCopies = Integer.parseInt(scanner.nextLine());
+                        PreparedStatement stmt = conn.prepareStatement("UPDATE books SET available_copies = ? WHERE id = ?");
+                        stmt.setInt(1, bookAvailableCopies);
+                        stmt.setInt(2, bookId);
+                        stmt.executeUpdate();
+                        break;
+                    }
+                    case 0: {
+                        active = false;
+                        break;
+                    }
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
     }
 }

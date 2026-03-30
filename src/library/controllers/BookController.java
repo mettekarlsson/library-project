@@ -54,7 +54,7 @@ public class BookController {
                    break;
                 }
                 case 5: {
-                   // bookrepository.editBook();
+                   bookrepository.editBook();
                     break;
                 }
                 case 6: {
