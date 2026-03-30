@@ -108,7 +108,7 @@ public class BookRepository {
                 System.out.println("Skriv in antalet sidor för boken:");
                 stmt3.setInt(4, Integer.parseInt(scanner.nextLine()));
 
-                int bookDescriptionRowsAffected = stmt3.executeUpdate();
+                stmt3.executeUpdate();
 
             }
 
@@ -127,7 +127,7 @@ public class BookRepository {
             try (PreparedStatement stmt5 = conn.prepareStatement("INSERT INTO book_categories (book_id, category_id) VALUES (?, ?)")) {
                 stmt5.setInt(1, bookId);
                 stmt5.setInt(2, categoryId);
-                int bookCategoryRowsAffected = stmt5.executeUpdate();
+                stmt5.executeUpdate();
             }
 
             //lägg till info i authors
@@ -142,7 +142,7 @@ public class BookRepository {
                 System.out.println("Skriv in författarens födelsedag:");
                 stmt2.setString(4, scanner.nextLine());
 
-                int authorRowsAffected = stmt2.executeUpdate();
+                stmt2.executeUpdate();
 
                 ResultSet generatedAuthorKey = stmt2.getGeneratedKeys();
                 if (generatedAuthorKey.next()) {
@@ -154,7 +154,7 @@ public class BookRepository {
             try (PreparedStatement stmt6 = conn.prepareStatement("INSERT INTO book_authors (book_id, author_id) VALUES (?, ?)")) {
                 stmt6.setInt(1, bookId);
                 stmt6.setInt(2, authorId);
-                int bookCategoryRowsAffected = stmt6.executeUpdate();
+                stmt6.executeUpdate();
             }
 
             //lägg till info i author_descriptions
@@ -165,7 +165,7 @@ public class BookRepository {
                 System.out.println("Skriv in hemsidan till författaren:");
                 stmt7.setString(3, scanner.nextLine());
 
-                int authorDescriptionRowsAffected = stmt7.executeUpdate();
+                stmt7.executeUpdate();
 
             }
 
