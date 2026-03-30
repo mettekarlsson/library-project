@@ -45,18 +45,18 @@ public class BookController {
 
                 case 3: {
                     System.out.println("Sök på en bok-titel:");
-                    ArrayList<Book> books = bookrepository.searchBook(scanner.nextLine());
+                    ArrayList<Book> books = bookservice.searchBook(scanner.nextLine());
                     for (Book b : books) {
                         System.out.println(b.toSearchString());
                     }
                     break;
                 }
                 case 4: {
-                   bookrepository.addBook();
+                   bookservice.addBook();
                    break;
                 }
                 case 5: {
-                   bookrepository.editBook();
+                   bookservice.editBook();
                     break;
                 }
                 case 6: {

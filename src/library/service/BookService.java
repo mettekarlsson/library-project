@@ -8,10 +8,12 @@ import java.util.ArrayList;
 public class BookService {
     BookRepository bookrepository = new BookRepository();
 
+    //bara ett mellansteg mellan repository och controller
     public ArrayList<Book> getAllBooks() {
         return bookrepository.getAllBooks();
     }
 
+    //filtrerar ut available books från getAllBooks()
     public ArrayList<Book> getAllAvailableBooks() {
         ArrayList<Book> books = bookrepository.getAllBooks();
         ArrayList<Book> availableBooks = new ArrayList<>();
@@ -20,6 +22,21 @@ public class BookService {
                 availableBooks.add(b);
             }
         } return availableBooks;
+    }
+
+    //bara ett mellansteg mellan repository och controller
+    public ArrayList<Book> searchBook(String searchTerm) {
+        return bookrepository.searchBook(searchTerm);
+    }
+
+    //bara ett mellansteg mellan repository och controller
+    public void addBook() {
+        bookrepository.addBook();
+    }
+
+    //bara ett mellansteg mellan repository och controller
+    public void editBook() {
+        bookrepository.editBook();
     }
 
 
