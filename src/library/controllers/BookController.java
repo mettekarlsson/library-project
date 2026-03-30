@@ -17,10 +17,11 @@ public class BookController {
         while (active) {
             System.out.println("---- Book Menu ----");
             System.out.println("1. Show all books");
-            System.out.println("2. Search book");
-            System.out.println("3. Add book");
-            System.out.println("4. Update book");
-            System.out.println("5. Delete book");
+            System.out.println("2. Show all available books");
+            System.out.println("3. Search book");
+            System.out.println("4. Add book");
+            System.out.println("5. Update book");
+            System.out.println("6. Delete book");
             System.out.println("0. Return to main menu");
             int choice = Integer.parseInt(scanner.nextLine());
 
@@ -33,6 +34,14 @@ public class BookController {
                     break;
                 }
                 case 2: {
+                    ArrayList<Book> books = new ArrayList<>(bookrepository.getAllAvailableBooks());
+                    for (Book b : books) {
+                        System.out.println(b);
+                    }
+                    break;
+                }
+
+                case 3: {
                     System.out.println("Sök på en bok-titel:");
                     ArrayList<Book> books = bookrepository.searchBook(scanner.nextLine());
                     for (Book b : books) {
@@ -40,15 +49,15 @@ public class BookController {
                     }
                     break;
                 }
-                case 3: {
+                case 4: {
                    bookrepository.addBook();
                    break;
                 }
-                case 4: {
+                case 5: {
                    // bookrepository.editBook();
                     break;
                 }
-                case 5: {
+                case 6: {
                    // bookrepository.deleteBook();
                     break;
                 }
