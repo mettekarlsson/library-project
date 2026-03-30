@@ -13,6 +13,44 @@ public class BookController {
     BookRepository bookrepository = new BookRepository();
     Scanner scanner = new Scanner(System.in);
 
+
+    public void memberMainMenu() {
+        boolean active = true;
+
+        while (active) {
+            System.out.println("---- Welcome ----");
+            System.out.println("1. Books");
+            System.out.println("2. Loans");
+            System.out.println("3. My profile");
+            System.out.println("4. Authors? ");
+            System.out.println("0. Log out");
+            int choice = Integer.parseInt(scanner.nextLine());
+
+            switch (choice) {
+                case 1: {
+                    memberBookMenu();
+                    break;
+                }
+                case 2: {
+                    //memberLoanMenu();
+                    break;
+                }
+                case 3: {
+                    //memberProfileMenu();
+                    break;
+                }
+                case 4: {
+                   // memberAuthorMenu();
+                    break;
+                }
+                case 0: {
+                    active = false;
+                    break;
+                }
+            }
+        }
+    }
+
     public void memberBookMenu() {
         boolean active = true;
 
@@ -22,7 +60,7 @@ public class BookController {
             System.out.println("2. Show all available books");
             System.out.println("3. Show top ten most popular books");
             System.out.println("4. Search book");
-            System.out.println("0. Log out");
+            System.out.println("0. Return");
             int choice = Integer.parseInt(scanner.nextLine());
 
             switch (choice) {
