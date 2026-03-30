@@ -20,10 +20,11 @@ public class BookController {
             System.out.println("---- Book Menu ----");
             System.out.println("1. Show all books");
             System.out.println("2. Show all available books");
-            System.out.println("3. Search book");
-            System.out.println("4. Add book");
-            System.out.println("5. Update book");
-            System.out.println("6. Delete book");
+            System.out.println("3. Show top ten most popular books");
+            System.out.println("4. Search book");
+            System.out.println("5. Add book");
+            System.out.println("6. Update book");
+            System.out.println("7. Delete book");
             System.out.println("0. Return to main menu");
             int choice = Integer.parseInt(scanner.nextLine());
 
@@ -44,6 +45,14 @@ public class BookController {
                 }
 
                 case 3: {
+                    ArrayList<Book> books = new ArrayList<>(bookservice.getPopularBooks());
+                    for (Book b : books) {
+                        System.out.println(b);
+                    }
+                    break;
+                }
+
+                case 4: {
                     System.out.println("Sök på en bok-titel:");
                     ArrayList<Book> books = bookservice.searchBook(scanner.nextLine());
                     for (Book b : books) {
@@ -51,15 +60,15 @@ public class BookController {
                     }
                     break;
                 }
-                case 4: {
+                case 5: {
                    bookservice.addBook();
                    break;
                 }
-                case 5: {
+                case 6: {
                    bookservice.editBook();
                     break;
                 }
-                case 6: {
+                case 7: {
                    // bookrepository.deleteBook();
                     break;
                 }

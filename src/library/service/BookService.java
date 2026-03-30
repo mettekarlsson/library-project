@@ -25,6 +25,11 @@ public class BookService {
     }
 
     //bara ett mellansteg mellan repository och controller
+    public ArrayList<Book> getPopularBooks() {
+        return bookrepository.getPopularBooks();
+    }
+
+    //bara ett mellansteg mellan repository och controller
     public ArrayList<Book> searchBook(String searchTerm) {
         return bookrepository.searchBook(searchTerm);
     }
