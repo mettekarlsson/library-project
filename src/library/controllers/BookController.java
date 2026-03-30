@@ -10,11 +10,11 @@ import java.util.Scanner;
 
 public class BookController {
     BookService bookservice = new BookService();
+    BookRepository bookrepository = new BookRepository();
+    Scanner scanner = new Scanner(System.in);
 
-    public void showBookMenu() {
-        BookRepository bookrepository = new BookRepository();
+    public void memberBookMenu() {
         boolean active = true;
-        Scanner scanner = new Scanner(System.in);
 
         while (active) {
             System.out.println("---- Book Menu ----");
@@ -22,10 +22,7 @@ public class BookController {
             System.out.println("2. Show all available books");
             System.out.println("3. Show top ten most popular books");
             System.out.println("4. Search book");
-            System.out.println("5. Add book");
-            System.out.println("6. Update book");
-            System.out.println("7. Delete book");
-            System.out.println("0. Return to main menu");
+            System.out.println("0. Log out");
             int choice = Integer.parseInt(scanner.nextLine());
 
             switch (choice) {
@@ -60,16 +57,35 @@ public class BookController {
                     }
                     break;
                 }
-                case 5: {
-                   bookservice.addBook();
-                   break;
-                }
-                case 6: {
-                   bookservice.editBook();
+                case 0: {
+                    active = false;
                     break;
                 }
-                case 7: {
-                   bookservice.deleteBook();
+            }
+
+        }
+    }
+
+    public void adminBookMenu() {
+        boolean active = true;
+        while (active) {
+            System.out.println("1. Add book");
+            System.out.println("2. Update book");
+            System.out.println("3. Delete book");
+            System.out.println("0. Log out");
+            int choice = Integer.parseInt(scanner.nextLine());
+
+            switch (choice) {
+                case 1: {
+                    bookservice.addBook();
+                    break;
+                }
+                case 2: {
+                    bookservice.editBook();
+                    break;
+                }
+                case 3: {
+                    bookservice.deleteBook();
                     break;
                 }
                 case 0: {
@@ -77,7 +93,6 @@ public class BookController {
                     break;
                 }
             }
-
         }
     }
 }

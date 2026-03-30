@@ -12,17 +12,29 @@ public class Main {
         boolean active = true;
 
             while (active) {
-                System.out.println("---- Main Menu ----");
-                System.out.println("1. Book-menu");
-                System.out.println("2. Author-menu");
-                System.out.println("3. Loan-menu");
-                System.out.println("4. Member-menu");
+                System.out.println("---- Log in ----");
+                System.out.println("1. Member");
+                System.out.println("2. Admin");
                 System.out.println("0. Exit");
                 int choice = Integer.parseInt(scanner.nextLine());
 
+
+//                System.out.println("---- Main Menu ----");
+//                System.out.println("1. Book-menu");
+//                System.out.println("2. Author-menu");
+//                System.out.println("3. Loan-menu");
+//                System.out.println("4. Member-menu");
+//                System.out.println("0. Exit");
+//                int choice = Integer.parseInt(scanner.nextLine());
+
                 switch (choice) {
                     case 1: {
-                        bookcontroller.showBookMenu();
+                        bookcontroller.memberBookMenu();
+                        break;
+                    }
+                    case 2: {
+                        bookcontroller.adminBookMenu();
+                        break;
                     }
                     case 0: {
                         active = false;
