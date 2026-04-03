@@ -6,7 +6,7 @@ import library.repositories.MemberRepository;
 import java.util.Scanner;
 
 public class MainController {
-    static Member loggedInUser = null;
+    public static Member loggedInUser = null;
         Scanner scanner = new Scanner(System.in);
         BookController bookController = new BookController();
         MemberController memberController = new MemberController();

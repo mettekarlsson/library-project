@@ -18,28 +18,18 @@ public class MemberController {
         while (active) {
             System.out.println("---- Your profile ----");
             System.out.println("1. Show my profile info");
-            System.out.println("2. Update my name");
-            System.out.println("3. Update my email");
-            System.out.println("4. Update my password");
+            System.out.println("2. Update my info");
             System.out.println("0. Return");
             int choice = Integer.parseInt(scanner.nextLine());
 
             switch (choice) {
                 case 1: {
-                    Member member = memberService.getMemberInfoById(loggedInUser.getId());
+                    Member member = memberService.getMemberById(loggedInUser.getId());
                     System.out.println(member);
                     break;
                 }
                 case 2: {
-                    //memberUpdateName();
-                    break;
-                }
-                case 3: {
-                    //memberUpdateEmail();
-                    break;
-                }
-                case 4: {
-                    //memberUpdatePassword();
+                    memberService.updateMemberInfo();
                     break;
                 }
                 case 0: {

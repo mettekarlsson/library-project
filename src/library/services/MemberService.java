@@ -12,8 +12,12 @@ public class MemberService {
        return memberRepository.getAllMembers();
     }
 
-    public Member getMemberInfoById(int id) {
-        return memberRepository.getMemberInfoById(id);
+    public Member getMemberById(int id) {
+        return memberRepository.getMemberById(id);
+    }
+
+    public void updateMemberInfo() {
+        memberRepository.updateMemberInfo();
     }
 
 }
