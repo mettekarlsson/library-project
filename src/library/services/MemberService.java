@@ -16,8 +16,8 @@ public class MemberService {
         return memberRepository.getMemberById(id);
     }
 
-    public void updateMemberInfo() {
-        memberRepository.updateMemberInfo();
+    public void updateMemberInfo(String column, String newValue) {
+        memberRepository.updateMemberInfo(column, newValue);
     }
 
 }

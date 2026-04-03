@@ -32,68 +32,15 @@ public class MemberRepository {
         return null;
     }
 
-    public void updateMemberInfo() {
-        boolean active = true;
-        while (active) {
-            System.out.println("---- Update member info ----");
-            System.out.println("1. Update name");
-            System.out.println("2. Update email");
-            System.out.println("3. Update password");
-            System.out.println("0. Return");
-            int choice = Integer.parseInt(scanner.nextLine().trim());
+    public void updateMemberInfo(String column, String newValue) {
 
-            switch (choice) {
-                case 1: {
-                    System.out.println("First name: ");
-                    String firstName = scanner.nextLine();
-                    System.out.println("Last name: ");
-                    String lastName = scanner.nextLine();
-                    try (Connection conn = DriverManager.getConnection(URL, USER, PASS);
-                         PreparedStatement stmt = conn.prepareStatement("UPDATE members SET first_name = ?, last_name = ? WHERE id = ?")) {
-                        stmt.setString(1, firstName);
-                        stmt.setString(2, lastName);
-                        stmt.setInt(3, loggedInUser.getId());
-
-                        stmt.executeUpdate();
-
-                    } catch (SQLException e) {
-                        System.out.println("Fel: " + e.getMessage());
-                    }
-                    break;
-                }
-                case 2: {
-                    System.out.println("New email: ");
-                    String newEmail = scanner.nextLine();
-                    try (Connection conn = DriverManager.getConnection(URL, USER, PASS);
-                         PreparedStatement stmt = conn.prepareStatement("UPDATE members SET email = ? WHERE id = ?")) {
-                        stmt.setString(1, newEmail);
-                        stmt.setInt(2, loggedInUser.getId());
-                        stmt.executeUpdate();
-
-                    } catch (SQLException e) {
-                        System.out.println("Fel: " + e.getMessage());
-                    }
-        break;
-                }
-                case 3: {
-                    System.out.println("New password: ");
-                    String newPassword = scanner.nextLine();
-                    try (Connection conn = DriverManager.getConnection(URL, USER, PASS);
-                         PreparedStatement stmt = conn.prepareStatement("UPDATE members SET password = ? WHERE id = ?")) {
-                        stmt.setString(1, newPassword);
-                        stmt.setInt(2, loggedInUser.getId());
-                        stmt.executeUpdate();
-
-                    } catch (SQLException e) {
-                        System.out.println("Fel: " + e.getMessage());
-                    }
-                    break;
-                }
-                case 0: {
-                    active = false;
-                    break;
-                }
-            }
+        try (Connection conn = DriverManager.getConnection(URL, USER, PASS);
+        PreparedStatement stmt = conn.prepareStatement("UPDATE members SET " + column + " = ? WHERE id = ?")) {
+            stmt.setString(1, newValue);
+            stmt.setInt(2, loggedInUser.getId());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Fel: " + e.getMessage());
         }
     }
 

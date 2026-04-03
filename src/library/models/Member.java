@@ -97,6 +97,6 @@ public class Member {
                 ", Member Since: " + membershipDate +
                 ", Membership Type: '" + membershipType + '\'' +
                 ", Membership Status: '" + status + '\'' +
-                ", Password: '" + password;
+                ", Password: '" + password + "'";
     }
 }

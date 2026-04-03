@@ -29,7 +29,47 @@ public class MemberController {
                     break;
                 }
                 case 2: {
-                    memberService.updateMemberInfo();
+                    boolean current = true;
+                    while (current) {
+                        System.out.println("---- Update member info ----");
+                        System.out.println("1. Update first name");
+                        System.out.println("2. Update last name");
+                        System.out.println("3. Update email");
+                        System.out.println("4. Update password");
+                        System.out.println("0. Return");
+                        int option = Integer.parseInt(scanner.nextLine().trim());
+
+                        switch (option) {
+                            case 1: {
+                                System.out.println("New first name:");
+                                String newValue = scanner.nextLine();
+                                memberService.updateMemberInfo("first_name", newValue);
+                                break;
+                            }
+                            case 2: {
+                                System.out.println("New last name:");
+                                String newValue = scanner.nextLine();
+                                memberService.updateMemberInfo("last_name", newValue);
+                                break;
+                            }
+                            case 3: {
+                                System.out.println("New email:");
+                                String newValue = scanner.nextLine();
+                                memberService.updateMemberInfo("email", newValue);
+                                break;
+                            }
+                            case 4: {
+                                System.out.println("New password:");
+                                String newValue = scanner.nextLine();
+                                memberService.updateMemberInfo("password", newValue);
+                                break;
+                            }
+                            case 0: {
+                                current = false;
+                                break;
+                            }
+                        }
+                    }
                     break;
                 }
                 case 0: {
