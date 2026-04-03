@@ -28,7 +28,7 @@ public class Main {
 
                 switch (choice) {
                     case 1: {
-                        mainController.memberMainMenu();
+                        mainController.memberLogIn();
                         break;
                     }
                     case 2: {

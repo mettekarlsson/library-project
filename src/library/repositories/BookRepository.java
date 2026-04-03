@@ -1,6 +1,6 @@
-package library.repository;
+package library.repositories;
 
-import library.model.Book;
+import library.models.Book;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -95,7 +95,7 @@ public class BookRepository {
 
     }
 
-    //lägg till en bok, ink författare, bokbeskrivning, författarbeskrivning samt junction tables
+    //lägg till en bok, ink författare, bokbeskrivning, författarbeskrivning samt junction tables (ska göras om till transaction)
     public void addBook() {
 
         try (Connection conn = DriverManager.getConnection(URL, USER, PASS);
@@ -195,8 +195,6 @@ public class BookRepository {
                 stmt7.executeUpdate();
 
             }
-
-
         } catch (SQLException e) {
             System.out.println("Fel: " + e.getMessage());
 

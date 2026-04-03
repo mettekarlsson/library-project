@@ -1,16 +1,40 @@
 package library.controllers;
 
+import library.models.Member;
+import library.repositories.MemberRepository;
+
 import java.util.Scanner;
 
 public class MainController {
+    static Member loggedInUser = null;
         Scanner scanner = new Scanner(System.in);
         BookController bookController = new BookController();
+        MemberController memberController = new MemberController();
+        MemberRepository memberRepository = new MemberRepository();
+
+        public void memberLogIn() {
+            System.out.println("Enter your email");
+            Member member = memberRepository.getMemberByEmail(scanner.nextLine());
+            if (member == null) {
+                System.out.println("Email not found");
+                return;
+            }
+            System.out.println("Enter your password");
+            String password = scanner.nextLine();
+
+            if(password.equals(member.getPassword())) {
+                loggedInUser = member;
+                memberMainMenu();
+            } else {
+                System.out.println("Wrong password");
+            }
+        }
 
     public void memberMainMenu() {
         boolean active = true;
 
         while (active) {
-            System.out.println("---- Welcome ----");
+            System.out.println("---- Welcome to the library ----");
             System.out.println("1. Books");
             System.out.println("2. Loans");
             System.out.println("3. My profile");
@@ -28,7 +52,7 @@ public class MainController {
                     break;
                 }
                 case 3: {
-                    //memberProfileMenu();
+                    memberController.memberProfileMenu();
                     break;
                 }
                 case 4: {
@@ -46,7 +70,7 @@ public class MainController {
     public void adminMainMenu() {
         boolean active = true;
         while (active) {
-            System.out.println("---- Welcome ----");
+            System.out.println("---- Welcome admin ----");
             System.out.println("1. Books");
             System.out.println("2. Loans");
             System.out.println("3. Members");
@@ -64,7 +88,7 @@ public class MainController {
                     break;
                 }
                 case 3: {
-                    //adminMemberMenu();
+                    memberController.adminMemberMenu();
                     break;
                 }
                 case 4: {

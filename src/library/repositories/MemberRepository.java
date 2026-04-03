@@ -1,0 +1,68 @@
+package library.repositories;
+
+import library.models.Member;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class MemberRepository {
+
+    private final String URL = "jdbc:mysql://localhost:3306/bibliotek";
+    private final String USER = "root";
+    private final String PASS = "Apelsinkr0kant!";
+    Scanner scanner = new Scanner(System.in);
+
+    public Member getMemberByEmail(String email) {
+
+        try (Connection conn = DriverManager.getConnection(URL, USER, PASS);
+        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM members WHERE email = ?")) {
+            stmt.setString(1, email);
+            ResultSet rs = stmt.executeQuery();
+
+            if(rs.next()) {
+                return new Member(rs.getInt("id"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("email"), rs.getDate("membership_date").toLocalDate(), rs.getString("membership_type"), rs.getString("status"), rs.getString("password"));
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Fel: " + e.getMessage());
+        }
+        return null;
+    }
+
+    public ArrayList<Member> getAllMembers() {
+        ArrayList<Member> members = new ArrayList<>();
+
+        try (Connection conn = DriverManager.getConnection(URL, USER, PASS);
+        Statement stmt = conn.createStatement()) {
+
+            ResultSet rs = stmt.executeQuery("SELECT * FROM members");
+
+            while (rs.next()) {
+                members.add(new Member(rs.getInt("id"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("email"), rs.getDate("membership_date").toLocalDate(), rs.getString("membership_type"), rs.getString("status"), rs.getString("password")));
+            }
+            return members;
+
+        } catch (SQLException e) {
+            System.out.println("Fel: " + e.getMessage());
+        }
+        return null;
+    }
+
+    public Member getMemberInfoById(int id) {
+
+        try (Connection conn = DriverManager.getConnection(URL, USER, PASS);
+        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM members WHERE id = ?")) {
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return new Member(rs.getInt("id"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("email"), rs.getDate("membership_date").toLocalDate(), rs.getString("membership_type"), rs.getString("status"), rs.getString("password"));
+            }
+        }
+        catch (SQLException e) {
+            System.out.println("Fel: " + e.getMessage());
+        }
+        return null;
+    }
+}

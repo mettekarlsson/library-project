@@ -1,21 +1,21 @@
-package library.service;
+package library.services;
 
-import library.model.Book;
-import library.repository.BookRepository;
+import library.models.Book;
+import library.repositories.BookRepository;
 
 import java.util.ArrayList;
 
 public class BookService {
-    BookRepository bookrepository = new BookRepository();
+    BookRepository bookRepository = new BookRepository();
 
     //bara ett mellansteg mellan repository och controller
     public ArrayList<Book> getAllBooks() {
-        return bookrepository.getAllBooks();
+        return bookRepository.getAllBooks();
     }
 
     //filtrerar ut available books från getAllBooks()
     public ArrayList<Book> getAllAvailableBooks() {
-        ArrayList<Book> books = bookrepository.getAllBooks();
+        ArrayList<Book> books = bookRepository.getAllBooks();
         ArrayList<Book> availableBooks = new ArrayList<>();
         for (Book b : books) {
             if (b.getAvailableCopies() > 0) {
@@ -26,27 +26,27 @@ public class BookService {
 
     //bara ett mellansteg mellan repository och controller
     public ArrayList<Book> getPopularBooks() {
-        return bookrepository.getPopularBooks();
+        return bookRepository.getPopularBooks();
     }
 
     //bara ett mellansteg mellan repository och controller
     public ArrayList<Book> searchBook(String searchTerm) {
-        return bookrepository.searchBook(searchTerm);
+        return bookRepository.searchBook(searchTerm);
     }
 
     //bara ett mellansteg mellan repository och controller
     public void addBook() {
-        bookrepository.addBook();
+        bookRepository.addBook();
     }
 
     //bara ett mellansteg mellan repository och controller
     public void editBook() {
-        bookrepository.editBook();
+        bookRepository.editBook();
     }
 
     //bara ett mellansteg mellan repository och controller
     public void deleteBook() {
-        bookrepository.deleteBook();
+        bookRepository.deleteBook();
     }
 
 

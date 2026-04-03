@@ -1,16 +1,13 @@
 package library.controllers;
 
-import library.Main;
-import library.model.Book;
-import library.repository.BookRepository;
-import library.service.BookService;
+import library.models.Book;
+import library.services.BookService;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BookController {
-    BookService bookservice = new BookService();
-    BookRepository bookrepository = new BookRepository();
+    BookService bookService = new BookService();
     Scanner scanner = new Scanner(System.in);
 
     public void memberBookMenu() {
@@ -27,14 +24,14 @@ public class BookController {
 
             switch (choice) {
                 case 1: {
-                    ArrayList<Book> books = new ArrayList<>(bookservice.getAllBooks());
+                    ArrayList<Book> books = new ArrayList<>(bookService.getAllBooks());
                     for (Book b : books) {
                         System.out.println(b);
                     }
                     break;
                 }
                 case 2: {
-                    ArrayList<Book> books = new ArrayList<>(bookservice.getAllAvailableBooks());
+                    ArrayList<Book> books = new ArrayList<>(bookService.getAllAvailableBooks());
                     for (Book b : books) {
                         System.out.println(b);
                     }
@@ -42,7 +39,7 @@ public class BookController {
                 }
 
                 case 3: {
-                    ArrayList<Book> books = new ArrayList<>(bookservice.getPopularBooks());
+                    ArrayList<Book> books = new ArrayList<>(bookService.getPopularBooks());
                     for (Book b : books) {
                         System.out.println(b);
                     }
@@ -51,7 +48,7 @@ public class BookController {
 
                 case 4: {
                     System.out.println("Sök på en bok-titel:");
-                    ArrayList<Book> books = bookservice.searchBook(scanner.nextLine());
+                    ArrayList<Book> books = bookService.searchBook(scanner.nextLine());
                     for (Book b : books) {
                         System.out.println(b.toSearchString());
                     }
@@ -77,15 +74,15 @@ public class BookController {
 
             switch (choice) {
                 case 1: {
-                    bookservice.addBook();
+                    bookService.addBook();
                     break;
                 }
                 case 2: {
-                    bookservice.editBook();
+                    bookService.editBook();
                     break;
                 }
                 case 3: {
-                    bookservice.deleteBook();
+                    bookService.deleteBook();
                     break;
                 }
                 case 0: {

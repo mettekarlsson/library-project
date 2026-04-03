@@ -1,4 +1,4 @@
-package library.model;
+package library.models;
 
 public class Book {
     //attribut från databasen
